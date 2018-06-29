@@ -245,7 +245,7 @@ def update_list():
             global itemsheet2
             global count
             sleep(count)
-            count = 0
+            count = 1
             try:
                 google = itemsheet2.row_values(1)
             except:
