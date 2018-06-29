@@ -295,4 +295,5 @@ def telepol():
 if __name__ == '__main__':
     _thread.start_new_thread(detector, ())
     _thread.start_new_thread(updater, ())
+    _thread.start_new_thread(update_list, ())
     telepol()
