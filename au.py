@@ -49,6 +49,7 @@ rose = '🌹'
 farm = '🍆'
 ambr = '🍁'
 
+count = 5
 adress = int(itemsheet1.cell(2, 1).value)
 
 idMe = 396978030
@@ -238,11 +239,35 @@ def updater():
             sleep(0.9)
 
 
-def detector():
+def update_list():
     while True:
         try:
             global itemsheet2
+            global count
+            sleep(count)
+            count = 0
+            try:
+                google = itemsheet2.row_values(1)
+            except:
+                creds2 = ServiceAccountCredentials.from_json_keyfile_name('auction2.json', scope)
+                client2 = gspread.authorize(creds2)
+                itemsheet2 = client2.open('Items-Auction').sheet1
+                google = itemsheet2.row_values(1)
+            for i in g_lotnames:
+                if i not in google:
+                    if count < 100:
+                        itemsheet1.update_cell(1, len(google) + 1, i)
+                        google.append(i)
+                        count = count + 1
+        except Exception as e:
+            sleep(0.9)
+
+
+def detector():
+    while True:
+        try:
             global adress
+            global g_lotnames
             sleep(1)
             text = requests.get('https://t.me/ChatWarsAuction/' + str(adress))
             search = re.search('Lot #(\d+) : (.*)\n', str(text.text))
@@ -251,15 +276,8 @@ def detector():
                 ench = re.search('(⚡)', name)
                 if ench:
                     name = re.sub('⚡\+\d+ ', '', name)
-                try:
-                    google = itemsheet2.row_values(1)
-                except:
-                    creds2 = ServiceAccountCredentials.from_json_keyfile_name('auction2.json', scope)
-                    client2 = gspread.authorize(creds2)
-                    itemsheet2 = client2.open('Items-Auction').sheet1
-                    google = itemsheet2.row_values(1)
-                if name not in google:
-                    itemsheet2.update_cell(1, len(google) + 1, name)
+                if name not in g_lotnames:
+                    g_lotnames.append(name)
                 adress = adress + 1
         except Exception as e:
             sleep(0.9)
