@@ -215,7 +215,11 @@ def repeat_all_messages(message):
             client1 = gspread.authorize(creds1)
             itemsheet1 = client1.open('Items-Auction').sheet1
             google = itemsheet1.row_values(1)
-        bot.send_message(message.chat.id, str(google))
+        if len(str(google)) > 4000:
+            text = str(google)[:4000]
+        else:
+            text = str(google)
+        bot.send_message(message.chat.id, str(text))
 
 
 def detector():
