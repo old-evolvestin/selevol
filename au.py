@@ -252,7 +252,7 @@ def detector():
                 if ench:
                     name = re.sub('⚡\+\d+ ', '', name)
                 try:
-                    google = itemsheet1.row_values(1)
+                    google = itemsheet2.row_values(1)
                 except:
                     creds2 = ServiceAccountCredentials.from_json_keyfile_name('auction2.json', scope)
                     client2 = gspread.authorize(creds2)
