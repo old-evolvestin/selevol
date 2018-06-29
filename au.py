@@ -25,7 +25,7 @@ sheet2 = client2.open('Users-Auction').sheet1
 itemsheet1 = client1.open('Items-Auction').sheet1
 itemsheet2 = client2.open('Items-Auction').sheet1
 g_lotnames = itemsheet1.row_values(1)
-tkn = '587974580:AAFGcUwspPdr2pU44nJqLD-ps9FxSwUJ6mg'#chats1[0]
+tkn = '429683355:AAF3GReDyewByK-WRLQ44xpCNKIsYg1G8X0'#chats1[0]
 bot = telebot.TeleBot(tkn)
 
 less = '🌲'
@@ -49,7 +49,7 @@ rose = '🌹'
 farm = '🍆'
 ambr = '🍁'
 
-adress = 200
+adress = int(itemsheet1.cell(2, 1).value)
 
 idMe = 396978030
 idChatDevelopment = -1001186759363
@@ -222,6 +222,22 @@ def repeat_all_messages(message):
         bot.send_message(message.chat.id, str(text))
 
 
+def updater():
+    while True:
+        try:
+            global itemsheet1
+            sleep(300)
+            try:
+                itemsheet1.update_cell(2, 1, str(adress))
+            except:
+                creds1 = ServiceAccountCredentials.from_json_keyfile_name('auction1.json', scope)
+                client1 = gspread.authorize(creds1)
+                itemsheet1 = client1.open('Items-Auction').sheet1
+                itemsheet1.update_cell(2, 1, str(adress))
+        except Exception as e:
+            sleep(0.9)
+
+
 def detector():
     while True:
         try:
@@ -260,4 +276,5 @@ def telepol():
 
 if __name__ == '__main__':
     _thread.start_new_thread(detector, ())
+    _thread.start_new_thread(updater, ())
     telepol()
