@@ -244,7 +244,7 @@ def detector():
             global itemsheet2
             global adress
             sleep(1)
-            text = requests.get('https://t.me/ChatWarsAuction/' + str(col))
+            text = requests.get('https://t.me/ChatWarsAuction/' + str(adress))
             search = re.search('Lot #(\d+) : (.*)\n', str(text.text))
             if search:
                 name = search.group(2)
