@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -49,7 +49,7 @@ rose = '🌹'
 farm = '🍆'
 ambr = '🍁'
 
-adress = 1300
+adress = 235
 
 idMe = 396978030
 idChatDevelopment = -1001186759363
@@ -207,7 +207,15 @@ def redmessages(message):
 @bot.message_handler(func=lambda message: message.text)
 def repeat_all_messages(message):
     if message.chat.id > 0:
-        kek = 0
+        global itemsheet1
+        try:
+            google = itemsheet1.row_values(1)
+        except:
+            creds1 = ServiceAccountCredentials.from_json_keyfile_name('auction1.json', scope)
+            client1 = gspread.authorize(creds1)
+            itemsheet1 = client1.open('Items-Auction').sheet1
+            google = itemsheet1.row_values(1)
+        bot.send_message(message.chat.id, str(google))
 
 
 def detector():
