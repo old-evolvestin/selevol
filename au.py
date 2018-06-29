@@ -233,9 +233,9 @@ def detector():
                 str(text.text))
             if search:
                 name = search.group(2)
-                ench = re.search('(⚡️)', name)
+                ench = re.search('(⚡)', name)
                 if ench:
-                    name = re.sub('⚡️\+\d+ ', '', name)
+                    name = re.sub('⚡\+\d+ ', '', name)
                 try:
                     google = itemsheet1.row_values(1)
                 except:
