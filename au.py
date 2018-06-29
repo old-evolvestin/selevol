@@ -227,7 +227,7 @@ def updater():
     while True:
         try:
             global itemsheet1
-            sleep(300)
+            sleep(100)
             try:
                 itemsheet1.update_cell(2, 1, str(adress))
             except:
@@ -268,7 +268,6 @@ def detector():
         try:
             global adress
             global g_lotnames
-            sleep(1)
             text = requests.get('https://t.me/ChatWarsAuction/' + str(adress))
             search = re.search('Lot #(\d+) : (.*)\n', str(text.text))
             if search:
