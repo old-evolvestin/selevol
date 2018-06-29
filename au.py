@@ -49,7 +49,7 @@ rose = '🌹'
 farm = '🍆'
 ambr = '🍁'
 
-adress = 235
+adress = 200
 
 idMe = 396978030
 idChatDevelopment = -1001186759363
@@ -225,13 +225,11 @@ def repeat_all_messages(message):
 def detector():
     while True:
         try:
-            global itemsheet1
+            global itemsheet2
             global adress
-            sleep(10)
-            text = requests.get('https://t.me/chatwars3/' + str(adress))
-            search = re.search(
-                'Лот #(\d+) : (.*)\nПродавец: (.*)\nТекущая цена: (\d+) 👝\nПокупатель: .+\nСрок: .*1060 (.*)',
-                str(text.text))
+            sleep(1)
+            text = requests.get('https://t.me/ChatWarsAuction/' + str(col))
+            search = re.search('Lot #(\d+) : (.*)\n', str(text.text))
             if search:
                 name = search.group(2)
                 ench = re.search('(⚡)', name)
@@ -240,12 +238,12 @@ def detector():
                 try:
                     google = itemsheet1.row_values(1)
                 except:
-                    creds1 = ServiceAccountCredentials.from_json_keyfile_name('auction1.json', scope)
-                    client1 = gspread.authorize(creds1)
-                    itemsheet1 = client1.open('Items-Auction').sheet1
-                    google = itemsheet1.row_values(1)
+                    creds2 = ServiceAccountCredentials.from_json_keyfile_name('auction2.json', scope)
+                    client2 = gspread.authorize(creds2)
+                    itemsheet2 = client2.open('Items-Auction').sheet1
+                    google = itemsheet2.row_values(1)
                 if name not in google:
-                    itemsheet1.update_cell(1, len(google) + 1, name)
+                    itemsheet2.update_cell(1, len(google) + 1, name)
                 adress = adress + 1
         except Exception as e:
             sleep(0.9)
