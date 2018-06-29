@@ -227,6 +227,7 @@ def detector():
         try:
             global itemsheet1
             global adress
+            sleep(10)
             text = requests.get('https://t.me/chatwars3/' + str(adress))
             search = re.search(
                 'Лот #(\d+) : (.*)\nПродавец: (.*)\nТекущая цена: (\d+) 👝\nПокупатель: .+\nСрок: .*1060 (.*)',
