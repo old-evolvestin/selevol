@@ -255,7 +255,7 @@ def update_list():
                 google = itemsheet2.row_values(1)
             for i in g_lotnames:
                 if i not in google:
-                    if count < 100:
+                    if count < 95:
                         itemsheet1.update_cell(1, len(google) + 1, i)
                         google.append(i)
                         count = count + 1
