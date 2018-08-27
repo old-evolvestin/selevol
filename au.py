@@ -200,11 +200,6 @@ def get_new_member(message):
                          chat_user + user_id + ': Добавил бота в чат: ' + title + chat_id + ')')
 
 
-@bot.message_handler(content_types=['audio', 'video', 'document', 'location', 'contact', 'sticker', 'voice'])
-def redmessages(message):
-    kek = 0
-
-
 @bot.message_handler(func=lambda message: message.text)
 def repeat_all_messages(message):
     if message.chat.id > 0:
@@ -217,10 +212,13 @@ def repeat_all_messages(message):
             itemsheet1 = client1.open('Items-Auction').sheet1
             google = itemsheet1.row_values(1)
         if len(str(google)) > 4000:
-            text = str(google)[:4000]
+            text1 = str(google)[:4000]
+            text2 = str(google)[4000:8000]
+            bot.send_message(message.chat.id, str(text1))
+            bot.send_message(message.chat.id, str(text2))
         else:
-            text = str(google)
-        bot.send_message(message.chat.id, str(text))
+            text1 = str(google)
+            bot.send_message(message.chat.id, str(text1))
 
 
 def updater():
