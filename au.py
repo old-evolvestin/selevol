@@ -25,7 +25,7 @@ sheet2 = client2.open('Users-Auction').sheet1
 itemsheet1 = client1.open('Items-Auction').sheet1
 itemsheet2 = client2.open('Items-Auction').sheet1
 g_lotnames = itemsheet1.row_values(1)
-tkn = '429683355:AAF3GReDyewByK-WRLQ44xpCNKIsYg1G8X0'#chats1[0]
+tkn = os.environ['TOKEN']
 bot = telebot.TeleBot(tkn)
 
 less = '🌲'
